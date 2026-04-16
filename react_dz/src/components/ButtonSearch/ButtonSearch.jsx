@@ -1,7 +1,7 @@
 import "./ButtonSearch.css";
 
-function ButtonSearch() {
-  return <button className="button-search">Искать</button>;
+function ButtonSearch({ text }) {
+  return <button className="button-search">{text}</button>;
 }
 
 export default ButtonSearch;
