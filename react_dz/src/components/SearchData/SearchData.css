@@ -1,0 +1,22 @@
+input {
+  border-radius: 12px;
+  border: 1px solid #323b54;
+  padding: 16px 40px;
+  width: 290px;
+}
+
+input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  color: #475069;
+}
+
+.search-film {
+  display: flex;
+  gap: 8px;
+  max-width: 580px;
+}
+
+.input-icon {
+  background: url("../../picture/search.svg") no-repeat 10px center;
+}

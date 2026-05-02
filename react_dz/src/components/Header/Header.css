@@ -1,0 +1,32 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* padding: 0 120px 0 120px; */
+  background-color: #121829cc;
+}
+
+.menu-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.button-entrance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button-color {
+  font-weight: 600;
+  font-size: 16px;
+  color: #a8aebf;
+  background-color: transparent;
+  text-align: center;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
