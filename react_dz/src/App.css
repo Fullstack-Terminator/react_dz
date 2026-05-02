@@ -1,4 +1,5 @@
 #root {
+  padding: 0 120px 0 120px;
   /* width: 100%; */
   /* max-width: 1280px; */
   /* margin: 0; */
@@ -44,6 +45,6 @@
 .search {
   display: flex;
   flex-direction: column;
-  padding: 0 120px 0 120px;
+  /* padding: 0 120px 0 120px; */
   min-width: 280px;
 }
