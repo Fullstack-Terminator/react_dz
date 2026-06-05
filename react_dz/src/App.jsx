@@ -7,6 +7,7 @@ import SearchData from "./components/SearchData/SearchData";
 import CardFilm from "./components/CardFilm/CardFilm";
 import FilmsList from "./components/FilmsList/FilmsList";
 import { useState } from "react";
+import cn from "classnames";
 
 function App() {
   const data = [
@@ -57,7 +58,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className={styles["search"]}>
+      <div className={cn(styles["search"])}>
         <Heading />
         <Subtitle />
         <SearchData />
