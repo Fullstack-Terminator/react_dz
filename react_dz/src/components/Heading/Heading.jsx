@@ -1,7 +1,7 @@
-import "./Heading.css";
+import styles from "./Heading.module.css";
 
 function Heading() {
-  return <div className="header">Поиск</div>;
+  return <div className={styles["header"]}>Поиск</div>;
 }
 
 export default Heading;

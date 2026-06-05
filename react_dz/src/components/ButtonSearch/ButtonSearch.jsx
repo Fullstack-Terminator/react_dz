@@ -1,7 +1,7 @@
-import "./ButtonSearch.css";
+import styles from "./ButtonSearch.module.css";
 
 function ButtonSearch({ text }) {
-  return <button className="button-search">{text}</button>;
+  return <button className={styles["button-search"]}>{text}</button>;
 }
 
 export default ButtonSearch;

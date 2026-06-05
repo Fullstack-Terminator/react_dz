@@ -1,21 +1,21 @@
-import "./CardFilm.css";
+import styles from "./CardFilm.module.css";
 
 function CardFilm({ estimation, image, title }) {
   return (
-    <div className="container-card">
-      <div className="card-film">
-        <div className="estimation">
+    <div className={styles["container-card"]}>
+      <div className={styles["card-film"]}>
+        <div className={styles["estimation"]}>
           <img src="./src/picture/star.svg" alt="star" />
           <p>{estimation}</p>
         </div>
-        <div className="img-container">
-          <img className="poster" src={image} alt={title} />
+        <div className={styles["img-container"]}>
+          <img className={styles["poster"]} src={image} alt={title} />
         </div>
 
-        <p className="title-film">{title}</p>
-        <button className="favourites-film">
+        <p className={styles["title-film"]}>{title}</p>
+        <button className={styles["favourites-film"]}>
           <img src="./src/picture/like.svg" alt="like" />
-          <p className="btn-text">В избранное</p>
+          <p className={styles["btn-text"]}>В избранное</p>
         </button>
       </div>
     </div>

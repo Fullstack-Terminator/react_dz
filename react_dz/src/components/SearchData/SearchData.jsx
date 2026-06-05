@@ -1,4 +1,4 @@
-import "./SearchData.css";
+import styles from "./SearchData.module.css";
 import { useState } from "react";
 import ButtonSearch from "../ButtonSearch/ButtonSearch";
 
@@ -15,12 +15,12 @@ function SearchData() {
   };
 
   return (
-    <form className="search-film" onSubmit={searchFilm}>
+    <form className={styles["search-film"]} onSubmit={searchFilm}>
       <input
         type="text"
         value={inputData}
         onChange={inputChange}
-        className="input-icon"
+        className={styles["input-icon"]}
         placeholder="Введите название"
       />
 
