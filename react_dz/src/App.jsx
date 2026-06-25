@@ -6,7 +6,8 @@ import Subtitle from "./components/Subtitle/Subtitle";
 import SearchData from "./components/SearchData/SearchData";
 import CardFilm from "./components/CardFilm/CardFilm";
 import FilmsList from "./components/FilmsList/FilmsList";
-import { useState } from "react";
+import LoginAccount from "./components/LoginAccount/LoginAccount";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 
 function App() {
@@ -54,12 +55,59 @@ function App() {
   ];
 
   const [items, setItems] = useState(data);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  const checkLoginStatus = () => {
+    const profiles = JSON.parse(localStorage.getItem("profiles"));
+    if (profiles) {
+      const loggedUser = profiles.find((item) => item.isLogined === true);
+      if (loggedUser) {
+        setIsLoggedIn(true);
+        setUserName(loggedUser.name);
+      } else {
+        setIsLoggedIn(false);
+        setUserName("");
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  const logIn = (name) => {
+    const profiles = JSON.parse(localStorage.getItem("profiles"));
+
+    if (!profiles) {
+      return;
+    }
+
+    profiles.forEach((item) => {
+      if (item.name === name) {
+        item.isLogined = true;
+      }
+    });
+    localStorage.setItem("profiles", JSON.stringify(profiles));
+    checkLoginStatus();
+  };
+
+  const logOut = () => {
+    const profiles = JSON.parse(localStorage.getItem("profiles"));
+    profiles.forEach((item) => {
+      if (item.isLogined === true) {
+        item.isLogined = false;
+      }
+    });
+    localStorage.setItem("profiles", JSON.stringify(profiles));
+    checkLoginStatus();
+  };
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} userName={userName} onLogout={logOut} />
       <div className={cn(styles["search"])}>
-        <Heading />
+        <Heading text="Поиск" />
         <Subtitle />
         <SearchData />
       </div>
@@ -72,6 +120,10 @@ function App() {
           />
         ))}
       </FilmsList>
+      <div className={cn(styles["profile"])}>
+        <Heading text="Вход" />
+        <LoginAccount onLogin={logIn} />
+      </div>
     </>
   );
 }
