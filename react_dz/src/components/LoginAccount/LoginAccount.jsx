@@ -7,12 +7,12 @@ function LoginAccount({ onLogin }) {
 
   const inputChange = (event) => {
     setInputName(event.target.value);
-    console.log(event.target.value);
   };
 
   const searchProfile = (e) => {
     e.preventDefault();
     onLogin(inputName);
+    alert(inputName);
   };
 
   return (

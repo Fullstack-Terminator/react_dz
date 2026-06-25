@@ -83,11 +83,14 @@ function App() {
       return;
     }
 
-    profiles.forEach((item) => {
-      if (item.name === name) {
-        item.isLogined = true;
-      }
-    });
+    const existingUser = profiles.find((item) => item.name === name);
+
+    if (existingUser) {
+      existingUser.isLogined = true;
+    } else {
+      profiles.push({ name: name, isLogined: true });
+    }
+
     localStorage.setItem("profiles", JSON.stringify(profiles));
     checkLoginStatus();
   };
