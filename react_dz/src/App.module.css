@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 190px;
+  gap: 25px;
+}

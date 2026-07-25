@@ -1,0 +1,19 @@
+.input {
+  border-radius: 12px;
+  border: 1px solid #323b54;
+  padding: 16px 20px;
+  width: 290px;
+  background-color: #121829;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  color: #475069;
+}
+
+.search-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
