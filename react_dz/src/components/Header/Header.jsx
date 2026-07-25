@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Header.module.css";
+import { UserContext } from "../../context/user.context";
 
-function Header({ isLoggedIn, userName, onLogout }) {
+function Header({ onLogout }) {
+  const { isLoggedIn, userName } = useContext(UserContext);
+
   function changeHeader() {
     if (isLoggedIn) {
       return (

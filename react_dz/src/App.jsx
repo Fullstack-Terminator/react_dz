@@ -9,6 +9,7 @@ import FilmsList from "./components/FilmsList/FilmsList";
 import LoginAccount from "./components/LoginAccount/LoginAccount";
 import { useState, useEffect } from "react";
 import cn from "classnames";
+import { UserContext } from "./context/user.context";
 
 function App() {
   const data = [
@@ -107,27 +108,31 @@ function App() {
   };
 
   return (
-    <>
-      <Header isLoggedIn={isLoggedIn} userName={userName} onLogout={logOut} />
-      <div className={cn(styles["search"])}>
-        <Heading text="Поиск" />
-        <Subtitle />
-        <SearchData />
-      </div>
-      <FilmsList>
-        {items.map((el) => (
-          <CardFilm
-            estimation={el.estimation}
-            image={el.image}
-            title={el.title}
-          />
-        ))}
-      </FilmsList>
-      <div className={cn(styles["profile"])}>
-        <Heading text="Вход" />
-        <LoginAccount onLogin={logIn} />
-      </div>
-    </>
+    <UserContext.Provider
+      value={{ isLoggedIn, setIsLoggedIn, userName, setUserName }}
+    >
+      <>
+        <Header isLoggedIn={isLoggedIn} userName={userName} onLogout={logOut} />
+        <div className={cn(styles["search"])}>
+          <Heading text="Поиск" />
+          <Subtitle />
+          <SearchData />
+        </div>
+        <FilmsList>
+          {items.map((el) => (
+            <CardFilm
+              estimation={el.estimation}
+              image={el.image}
+              title={el.title}
+            />
+          ))}
+        </FilmsList>
+        <div className={cn(styles["profile"])}>
+          <Heading text="Вход" />
+          <LoginAccount onLogin={logIn} />
+        </div>
+      </>
+    </UserContext.Provider>
   );
 }
 

@@ -12,7 +12,6 @@ function LoginAccount({ onLogin }) {
   const searchProfile = (e) => {
     e.preventDefault();
     onLogin(inputName);
-    alert(inputName);
   };
 
   return (
