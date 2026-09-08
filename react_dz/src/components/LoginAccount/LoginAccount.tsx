@@ -1,15 +1,16 @@
 import styles from "./LoginAccount.module.css";
-import { useEffect, useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import ButtonSearch from "../ButtonSearch/ButtonSearch";
+import type { LoginAccountProps } from "./LoginAccount.props";
 
-function LoginAccount({ onLogin }) {
+function LoginAccount({ onLogin }: LoginAccountProps) {
   const [inputName, setInputName] = useState("");
 
-  const inputChange = (event) => {
+  const inputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputName(event.target.value);
   };
 
-  const searchProfile = (e) => {
+  const searchProfile = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onLogin(inputName);
   };

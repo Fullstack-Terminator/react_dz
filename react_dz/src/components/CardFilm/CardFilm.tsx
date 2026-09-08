@@ -1,6 +1,7 @@
 import styles from "./CardFilm.module.css";
+import type { CardFilmProps } from "./CardFilm.props";
 
-function CardFilm({ estimation, image, title }) {
+function CardFilm({ estimation, image, title }: CardFilmProps) {
   return (
     <div className={styles["container-card"]}>
       <div className={styles["card-film"]}>

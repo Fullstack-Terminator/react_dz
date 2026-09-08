@@ -1,16 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+// import { useContext } from "react";
 import styles from "./Header.module.css";
-import { UserContext } from "../../context/user.context";
+// import { UserContext } from "../../context/user.context";
+import type { HeaderProps } from "./Header.props";
 
-function Header({ onLogout }) {
-  const { isLoggedIn, userName } = useContext(UserContext);
+function Header({ isLogined, name, onLogout }: HeaderProps) {
+  // const { isLogined, name } = useContext(UserContext);
 
   function changeHeader() {
-    if (isLoggedIn) {
+    if (isLogined) {
       return (
         <div className={styles["menu-buttons"]}>
           <button className={styles["button-entrance"]}>
-            {userName}
+            {name}
             <img src="./src/picture/user.svg" alt="Иконка профиля" />
           </button>
           <button className={styles["button-color"]} onClick={onLogout}>

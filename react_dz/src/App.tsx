@@ -1,15 +1,16 @@
 import styles from "./App.module.css";
 import Header from "./components/Header/Header";
-import ButtonSearch from "./components/ButtonSearch/ButtonSearch";
 import Heading from "./components/Heading/Heading";
 import Subtitle from "./components/Subtitle/Subtitle";
 import SearchData from "./components/SearchData/SearchData";
 import CardFilm from "./components/CardFilm/CardFilm";
 import FilmsList from "./components/FilmsList/FilmsList";
 import LoginAccount from "./components/LoginAccount/LoginAccount";
-import { useState, useEffect } from "react";
+import { useState, useCallback, useLayoutEffect } from "react";
 import cn from "classnames";
 import { UserContext } from "./context/user.context";
+import { type CardFilmProps } from "./components/CardFilm/CardFilm.props";
+import type { AppProps } from "./App.props";
 
 function App() {
   const data = [
@@ -55,14 +56,24 @@ function App() {
     },
   ];
 
-  const [items, setItems] = useState(data);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [items] = useState<CardFilmProps[]>(data);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
 
-  const checkLoginStatus = () => {
-    const profiles = JSON.parse(localStorage.getItem("profiles"));
+  const getProfiles = useCallback((): AppProps[] => {
+    try {
+      return JSON.parse(localStorage.getItem("profiles") ?? "[]");
+    } catch {
+      return [];
+    }
+  }, []);
+
+  const checkLoginStatus = (): void => {
+    const profiles = getProfiles();
     if (profiles) {
-      const loggedUser = profiles.find((item) => item.isLogined === true);
+      const loggedUser = profiles.find(
+        (item: AppProps) => item.isLogined === true,
+      );
       if (loggedUser) {
         setIsLoggedIn(true);
         setUserName(loggedUser.name);
@@ -73,12 +84,15 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    checkLoginStatus();
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      checkLoginStatus();
+    }, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const logIn = (name) => {
-    const profiles = JSON.parse(localStorage.getItem("profiles"));
+  const logIn = (name: string) => {
+    const profiles = getProfiles();
 
     if (!profiles) {
       return;
@@ -97,7 +111,7 @@ function App() {
   };
 
   const logOut = () => {
-    const profiles = JSON.parse(localStorage.getItem("profiles"));
+    const profiles = getProfiles();
     profiles.forEach((item) => {
       if (item.isLogined === true) {
         item.isLogined = false;
@@ -109,10 +123,15 @@ function App() {
 
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, userName, setUserName }}
+      value={{
+        isLogined: isLoggedIn,
+        setIsLoggedIn,
+        name: userName,
+        setUserName,
+      }}
     >
       <>
-        <Header isLoggedIn={isLoggedIn} userName={userName} onLogout={logOut} />
+        <Header isLogined={isLoggedIn} name={userName} onLogout={logOut} />
         <div className={cn(styles["search"])}>
           <Heading text="Поиск" />
           <Subtitle />
