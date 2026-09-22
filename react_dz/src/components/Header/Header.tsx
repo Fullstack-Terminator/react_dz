@@ -1,7 +1,7 @@
-// import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
-// import { UserContext } from "../../context/user.context";
 import type { HeaderProps } from "./Header.props";
+import cn from "classnames";
 
 function Header({ isLogined, name, onLogout }: HeaderProps) {
   // const { isLogined, name } = useContext(UserContext);
@@ -10,21 +10,32 @@ function Header({ isLogined, name, onLogout }: HeaderProps) {
     if (isLogined) {
       return (
         <div className={styles["menu-buttons"]}>
-          <button className={styles["button-entrance"]}>
+          <div className={styles["button-entrance"]}>
             {name}
             <img src="./src/picture/user.svg" alt="Иконка профиля" />
-          </button>
-          <button className={styles["button-color"]} onClick={onLogout}>
+          </div>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              cn(styles["button-color"], { [styles.active]: isActive })
+            }
+            onClick={onLogout}
+          >
             Выйти
-          </button>
+          </NavLink>
         </div>
       );
     } else {
       return (
-        <button className={styles["button-entrance"]}>
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            cn(styles["button-entrance"], { [styles.active]: isActive })
+          }
+        >
           Войти
           <img src="./src/picture/entrance.svg" alt="Иконка входа" />
-        </button>
+        </NavLink>
       );
     }
   }
@@ -35,8 +46,22 @@ function Header({ isLogined, name, onLogout }: HeaderProps) {
         <img src="./src/picture/favourites.svg" alt="Иконка избранного" />
       </div>
       <div className={styles["menu-buttons"]}>
-        <button className={styles["button-color"]}>Поиск фильмов</button>
-        <button className={styles["button-color"]}>Мои фильмы</button>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            cn(styles["button-color"], { [styles.active]: isActive })
+          }
+        >
+          Поиск фильмов
+        </NavLink>
+        <NavLink
+          to="/favorites"
+          className={({ isActive }) =>
+            cn(styles["button-color"], { [styles.active]: isActive })
+          }
+        >
+          Мои фильмы
+        </NavLink>
         {changeHeader()}
       </div>
     </header>

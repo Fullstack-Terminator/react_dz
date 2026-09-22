@@ -5,6 +5,8 @@ export interface UserContextType {
   isLogined: boolean;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   setUserName: Dispatch<SetStateAction<string>>;
+  logIn: (name: string) => void;
+  logOut: () => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -12,4 +14,6 @@ export const UserContext = createContext<UserContextType>({
   isLogined: false,
   setIsLoggedIn: () => {},
   setUserName: () => {},
+  logIn: () => {},
+  logOut: () => {},
 });
